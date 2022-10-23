@@ -37,7 +37,9 @@ jobs:
           path: ${{ github.workspace }}/debug/.venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
-      - run: |
+      - name: Poetry install
+        if: steps.cache-primes.outputs.cache-hit != 'true'
+        run: |
           pwd
           echo ${{ github.workspace }}
           ls -a
