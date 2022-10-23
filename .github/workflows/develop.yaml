@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  push:
+    - "main"
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python-project
+    
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+        
+      - name: Install poetry
+        run: |
+          pip3 install pip -U
+          export PATH=${PATH}:/home/runner/.local/bin
+          pip3 install poetry
+          poetry config virtualenvs.in-project true
+
+      - run: poetry install
