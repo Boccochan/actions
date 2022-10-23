@@ -30,7 +30,7 @@ jobs:
 
       - name: Load cached venv
         id: cached-poetry-dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/debug/.venv
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
@@ -43,3 +43,19 @@ jobs:
           echo ${{ github.workspace }}
           ls -a
           poetry install
+
+
+      - name: Load cached node_modules
+        id: cached-poetry-dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/debug/node_modules
+          key: yarn-${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: yarn install
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: |
+          echo ${{ steps.cached-poetry-dependencies.outputs.cache-hit }}
+          pwd
+          ls -a
+          yarn install
