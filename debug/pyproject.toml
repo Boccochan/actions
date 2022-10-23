@@ -1,14 +1,13 @@
 [tool.poetry]
-name = "python-project"
+name = "debug"
 version = "0.1.0"
 description = ""
 authors = ["boccochan <boccochan@gmail.com>"]
 readme = "README.md"
-packages = [{include = "python_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-boto3 = "^1.24.96"
+pytest = "^7.1.3"
 
 
 [build-system]
