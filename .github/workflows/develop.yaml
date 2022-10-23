@@ -38,5 +38,6 @@ jobs:
           key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
       - run: |
+          pwd
           ls -a
           poetry install
